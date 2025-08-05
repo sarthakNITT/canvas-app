@@ -4,6 +4,7 @@ import RectLogic from "./rect/rectLogic"
 import ShapeModal from "../components/ShapeModal"
 import CircleLogic from "./circle/circleLogic"
 import LineLogic from "./line/lineLogic"
+import TextLogic from "./text/textLogic"
 
 export default function App () {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -14,6 +15,7 @@ export default function App () {
             if(!ctx){
                 return 
             }
+            TextLogic(canvas, ctx)
             // LineLogic(canvas, ctx)
             // CircleLogic(canvas, ctx)
             // RectLogic(canvas, ctx)
