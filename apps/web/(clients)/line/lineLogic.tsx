@@ -1,4 +1,5 @@
 export default function LineLogic (canvas: any, ctx: any) {
+    console.log(`called: line`);
     ctx.fillStyle = "rgba(0,0,0)"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.strokeStyle = "rgba(255, 255, 255)"

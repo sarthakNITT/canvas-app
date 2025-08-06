@@ -1,4 +1,5 @@
 export default function TextLogic (canvas: any, ctx: any) {
+    console.log(`called: text`);
     let text = "";
     ctx.fillStyle = "rgba(0,0,0)"
     ctx.fillRect(0, 0, canvas.width, canvas.height)

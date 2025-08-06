@@ -3,6 +3,8 @@ import App from "./canvasScreen";
 
 export default function ClientApp () {
     return (
-        <App/>
+        <div>
+            <App/>
+        </div>
     )
 }

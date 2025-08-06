@@ -1,4 +1,5 @@
 export default function CircleLogic (canvas: any, ctx: any) {
+    console.log(`called: circle`);
     ctx.fillStyle = "rgba(0,0,0)"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.strokeStyle = "rgba(255, 255, 255)"

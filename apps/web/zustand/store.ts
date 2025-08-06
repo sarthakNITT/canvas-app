@@ -1,13 +1,17 @@
 import {create} from "zustand"
 
 type State = {
-    shape: "text" | "arc" | "line" | "rect" | 'lock'
+    shape: "text" | "arc" | "line" | "rect",
+    lock: boolean
 }
 type Action = {
-    setShape: (shape: State['shape'])=>void
+    setShape: (shape: State['shape'])=>void,
+    setLock: (shape: State['lock'])=>void,
 }
 
 export const ShapeSelected = create<State & Action>((set)=>({
     shape: "text",
-    setShape: (shape)=>set(()=>({shape: shape}))
+    lock: false,
+    setShape: (shape)=>set(()=>({shape: shape})),
+    setLock: (lock)=>set(()=>({lock: lock}))
 }))
