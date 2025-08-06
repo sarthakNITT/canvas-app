@@ -1,0 +1,25 @@
+{
+  "name": "@repo/icons",
+  "version": "1.0.0",
+  "main": "index.js",
+  "exports": {
+    "./*": "./src/*.tsx"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
+    "react": "^19.1.0",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
+  }
+}

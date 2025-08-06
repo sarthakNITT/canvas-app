@@ -11,21 +11,26 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
     "@repo/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.1.11",
     "next": "^15.4.2",
     "postcss": "^8.5.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.11"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1",
+    "tailwindcss": "^4.1.11",
+    "toolkit": "link:@types/reduxjs/toolkit",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
     "@repo/icons": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
+    "@types/react": "18.2.79",
+    "@types/react-dom": "18.2.25",
     "eslint": "^9.31.0",
     "typescript": "5.8.2"
   }

@@ -1,9 +1,9 @@
-import App from "../(clients)/canvasScreen";
+import ClientApp from "../(clients)/app";
 
 export default function Home () {
   return(
-    <div >
-      <App/>
+    <div>
+      <ClientApp/>
     </div>
   )
 }

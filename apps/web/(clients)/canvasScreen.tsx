@@ -5,9 +5,11 @@ import ShapeModal from "../components/ShapeModal"
 import CircleLogic from "./circle/circleLogic"
 import LineLogic from "./line/lineLogic"
 import TextLogic from "./text/textLogic"
+import { ShapeSelected } from "../zustand/store"
 
 export default function App () {
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const shape = ShapeSelected((state)=>state.shape)
     useEffect(()=>{
         if(canvasRef.current){
             const canvas = canvasRef.current
@@ -15,12 +17,18 @@ export default function App () {
             if(!ctx){
                 return 
             }
-            TextLogic(canvas, ctx)
-            // LineLogic(canvas, ctx)
-            // CircleLogic(canvas, ctx)
-            // RectLogic(canvas, ctx)
+            console.log(`shape selected is: ${shape}`);
+            if(shape==='arc'){
+                CircleLogic(canvas, ctx)
+            }else if(shape==='line'){
+                LineLogic(canvas, ctx)
+            }else if(shape==='text'){
+                TextLogic(canvas, ctx)
+            }else if(shape==='rect'){
+                RectLogic(canvas, ctx)
+            }
         }
-    },[canvasRef])
+    },[canvasRef, shape])
     return(
         <div>
             <div className="absolute mt-3 text-white">
