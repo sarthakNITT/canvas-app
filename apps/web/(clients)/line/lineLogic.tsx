@@ -8,13 +8,12 @@ export default function LineLogic (canvas: any, ctx: any) {
     let startX = 0;
     let startY = 0;
 
-    canvas.addEventListener("mousedown", (e: any)=>{
+    const handleMouseDown =(e: any) => {
         clicked = true;
         startX = e.clientX;
         startY = e.clientY;
-    })
-
-    canvas.addEventListener("mouseup", (e: any)=>{
+    }
+    const handleMouseUp =(e: any) => {
         clicked = false
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.fillStyle = 'rgba(0, 0, 0)'
@@ -24,9 +23,8 @@ export default function LineLogic (canvas: any, ctx: any) {
         ctx.moveTo(startX, startY)
         ctx.lineTo(e.clientX, e.clientY)
         ctx.stroke()
-    })
-
-    canvas.addEventListener("mousemove", (e: any)=>{
+    }
+    const handleMouseMove =(e: any) => {
         if(clicked){
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.fillStyle = 'rgba(0, 0, 0)'
@@ -37,5 +35,15 @@ export default function LineLogic (canvas: any, ctx: any) {
             ctx.lineTo(e.clientX, e.clientY)
             ctx.stroke()
         }
-    })
+    }
+
+    canvas.addEventListener("mousedown", handleMouseDown)
+    canvas.addEventListener("mouseup", handleMouseUp)
+    canvas.addEventListener("mousemove", handleMouseMove)
+
+    return () => {
+        canvas.removeEventListener("mousedown", handleMouseDown)
+        canvas.removeEventListener("mousemove", handleMouseMove)
+        canvas.removeEventListener("mouseup", handleMouseUp)
+    }
 }

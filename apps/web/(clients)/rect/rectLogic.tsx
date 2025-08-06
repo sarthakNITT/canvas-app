@@ -8,17 +8,15 @@ export default function RectLogic (canvas: any, ctx: any) {
     let startX = 0;
     let startY = 0;
 
-    canvas.addEventListener("mousedown", (e: any)=>{
+    const handleMouseDown = (e: any) => {
         clicked = true;
         startX = e.clientX;
         startY = e.clientY;
-    })
-
-    canvas.addEventListener("mouseup", (e: any)=>{
+    }
+    const handleMouseUp = (e: any) => {
         clicked = false
-    })
-
-    canvas.addEventListener("mousemove", (e: any)=>{
+    }
+    const handleMouseMove = (e: any) => {
         if(clicked){
             const width = e.clientX - startX
             const height = e.clientY - startY
@@ -28,5 +26,15 @@ export default function RectLogic (canvas: any, ctx: any) {
             ctx.strokeStyle = 'rgba(255, 255, 255)'
             ctx.strokeRect(startX, startY, width, height)
         }
-    })
+    }
+
+    canvas.addEventListener("mousedown", handleMouseDown)
+    canvas.addEventListener("mouseup", handleMouseUp)
+    canvas.addEventListener("mousemove", handleMouseMove)
+
+    return () => {
+        canvas.removeEventListener("mousedown", handleMouseDown)
+        canvas.removeEventListener("mousemove", handleMouseMove)
+        canvas.removeEventListener("mouseup", handleMouseUp)
+    }
 }

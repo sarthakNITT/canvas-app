@@ -17,7 +17,7 @@ export default function App () {
     const setLock = ShapeSelected((state)=>state.setLock)
     
     useEffect(()=>{
-        
+        let cleanup: any;
         console.log(`Lock status: ${lock}`);
         if(lock) return
         else if(canvasRef.current){
@@ -31,17 +31,21 @@ export default function App () {
             console.log(`shape selected is: ${shape}`);
             if(shape==='arc'){
                 console.log(`calling: ${shape}`);
-                CircleLogic(canvas, ctx)
+                cleanup = CircleLogic(canvas, ctx)
             }else if(shape==='line'){
                 console.log(`calling: ${shape}`);
-                LineLogic(canvas, ctx)
+                cleanup = LineLogic(canvas, ctx)
             }else if(shape==='text'){
                 console.log(`calling: ${shape}`);
-                TextLogic(canvas, ctx)
+                cleanup = TextLogic(canvas, ctx)
             }else if(shape==='rect'){
                 console.log(`calling: ${shape}`);
-                RectLogic(canvas, ctx)
+                cleanup = RectLogic(canvas, ctx)
             }
+        }
+
+        return () => {
+            cleanup?.()
         }
     },[canvasRef, shape, lock])
     return(

@@ -8,18 +8,16 @@ export default function CircleLogic (canvas: any, ctx: any) {
     let startX = 0;
     let startY = 0;
 
-    canvas.addEventListener("mousedown", (e: any)=>{
+    const handleMouseDown = (e: any) => {
         clicked = true;
         startX = e.clientX;
         startY = e.clientY;
         console.log(startX, startY);
-    })
-    
-    canvas.addEventListener("mouseup", (e: any)=>{
-        clicked = false
-    })
-    
-    canvas.addEventListener("mousemove", (e: any)=>{
+    }
+    const handleMouseUp = (e: any) => {
+        clicked = false;
+    }
+    const handleMouseMove = (e: any) => {
         if(clicked){
             ctx.beginPath();
             const radius = e.clientX - startX
@@ -30,5 +28,15 @@ export default function CircleLogic (canvas: any, ctx: any) {
             ctx.strokeStyle = 'rgba(255, 255, 255)'
             ctx.stroke();
         }
-    })
+    }
+
+    canvas.addEventListener("mousedown", handleMouseDown)
+    canvas.addEventListener("mouseup", handleMouseUp)
+    canvas.addEventListener("mousemove", handleMouseMove)
+
+    return () => {
+        canvas.removeEventListener("mousedown", handleMouseDown)
+        canvas.removeEventListener("mousemove", handleMouseMove)
+        canvas.removeEventListener("mouseup", handleMouseUp)
+    }
 }

@@ -8,14 +8,14 @@ export default function TextLogic (canvas: any, ctx: any) {
     let startY = 0;
     let clicked = false;
     let typeStart = false;
-    canvas.addEventListener("mousedown", (e: any)=>{
+
+    const handleMouseDown = (e: any) => {
         clicked = true
         {typeStart===true ? typeStart=false : typeStart=true }
         startX = e.clientX
         startY = e.clientY
-    })
-    canvas.tabIndex = 1000;
-    canvas.addEventListener("keydown", (e: any)=>{
+    }
+    const handleKeyDown = (e: any) => {
         if(clicked && typeStart){
             if(e.key==="Backspace"){
                 text = text.slice(0, -1)
@@ -31,5 +31,14 @@ export default function TextLogic (canvas: any, ctx: any) {
             ctx.fillStyle = 'white';
             ctx.fillText(text, startX, startY);
         }
-    })
+    }
+
+    canvas.addEventListener("mousedown", handleMouseDown)
+    canvas.tabIndex = 1000;
+    canvas.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+        canvas.removeEventListener("mousedown", handleMouseDown)
+        canvas.removeEventListener("keydown", handleKeyDown)
+    }
 }
