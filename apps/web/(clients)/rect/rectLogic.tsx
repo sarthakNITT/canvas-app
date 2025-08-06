@@ -1,6 +1,10 @@
-export default function RectLogic (canvas: any, ctx: any) {
+"use client"
+
+import { ShapeSelected } from "../../zustand/store";
+
+export default function RectLogic (canvas: any, ctx: any, colour: string) {
     console.log(`called: rect`);
-    ctx.fillStyle = "rgba(0,0,0)"
+    ctx.fillStyle = colour
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.strokeStyle = "rgba(255, 255, 255)"
 
@@ -21,7 +25,7 @@ export default function RectLogic (canvas: any, ctx: any) {
             const width = e.clientX - startX
             const height = e.clientY - startY
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.fillStyle = 'rgba(0, 0, 0)'
+            ctx.fillStyle = colour
             ctx.fillRect(0, 0, canvas.width, canvas.height)
             ctx.strokeStyle = 'rgba(255, 255, 255)'
             ctx.strokeRect(startX, startY, width, height)

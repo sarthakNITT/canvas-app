@@ -1,7 +1,11 @@
-export default function TextLogic (canvas: any, ctx: any) {
+"use client"
+
+import { ShapeSelected } from "../../zustand/store";
+
+export default function TextLogic (canvas: any, ctx: any, colour: string) {
     console.log(`called: text`);
     let text = "";
-    ctx.fillStyle = "rgba(0,0,0)"
+    ctx.fillStyle = colour
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.strokeStyle = "rgba(255, 255, 255)"
     let startX = 0;
@@ -26,7 +30,7 @@ export default function TextLogic (canvas: any, ctx: any) {
             }
             ctx.font = "15px Arial"
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'black';
+            ctx.fillStyle = colour
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = 'white';
             ctx.fillText(text, startX, startY);

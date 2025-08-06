@@ -9,11 +9,13 @@ import { ShapeSelected } from "../zustand/store"
 import Colour from "@repo/icons/colour"
 import Unlock from "@repo/icons/unlock"
 import Lock from "@repo/icons/lock"
+import Moon from "@repo/icons/moon"
 
 export default function App () {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const shape = ShapeSelected((state)=>state.shape)
     const lock = ShapeSelected((state)=>state.lock)
+    const colour = ShapeSelected((state)=>state.canvasColour)
     const setLock = ShapeSelected((state)=>state.setLock)
     
     useEffect(()=>{
@@ -31,16 +33,16 @@ export default function App () {
             console.log(`shape selected is: ${shape}`);
             if(shape==='arc'){
                 console.log(`calling: ${shape}`);
-                cleanup = CircleLogic(canvas, ctx)
+                cleanup = CircleLogic(canvas, ctx, colour)
             }else if(shape==='line'){
                 console.log(`calling: ${shape}`);
-                cleanup = LineLogic(canvas, ctx)
+                cleanup = LineLogic(canvas, ctx, colour)
             }else if(shape==='text'){
                 console.log(`calling: ${shape}`);
-                cleanup = TextLogic(canvas, ctx)
+                cleanup = TextLogic(canvas, ctx, colour)
             }else if(shape==='rect'){
                 console.log(`calling: ${shape}`);
-                cleanup = RectLogic(canvas, ctx)
+                cleanup = RectLogic(canvas, ctx, colour)
             }
         }
 
@@ -61,8 +63,9 @@ export default function App () {
                 <div className="pr-4 border-r">
                     <ShapeModal/>
                 </div>
-                <div>
-                    <Colour/>
+                <div className="flex flex-row gap-4">
+                    <button className="flex cursor-pointer"><Colour/></button>
+                    <button className="flex cursor-pointer"><Moon/></button>
                 </div>
             </div>
             <canvas ref={canvasRef}></canvas>

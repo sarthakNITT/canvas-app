@@ -1,6 +1,10 @@
-export default function LineLogic (canvas: any, ctx: any) {
+"use client"
+
+import { ShapeSelected } from "../../zustand/store";
+
+export default function LineLogic (canvas: any, ctx: any, colour: string) {
     console.log(`called: line`);
-    ctx.fillStyle = "rgba(0,0,0)"
+    ctx.fillStyle = colour
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.strokeStyle = "rgba(255, 255, 255)"
 
@@ -16,7 +20,7 @@ export default function LineLogic (canvas: any, ctx: any) {
     const handleMouseUp =(e: any) => {
         clicked = false
         ctx.clearRect(0, 0, canvas.width, canvas.height)
-        ctx.fillStyle = 'rgba(0, 0, 0)'
+        ctx.fillStyle = colour
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.strokeStyle = 'rgba(255, 255, 255)'
         ctx.beginPath()
@@ -27,7 +31,7 @@ export default function LineLogic (canvas: any, ctx: any) {
     const handleMouseMove =(e: any) => {
         if(clicked){
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.fillStyle = 'rgba(0, 0, 0)'
+            ctx.fillStyle = colour
             ctx.fillRect(0, 0, canvas.width, canvas.height)
             ctx.strokeStyle = 'rgba(255, 255, 255)'
             ctx.beginPath()
