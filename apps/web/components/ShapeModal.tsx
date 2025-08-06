@@ -8,17 +8,28 @@ type shapeDesign = "text" | "arc" | "line" | "rect"
 
 export default function ShapeModal () {
     const setShape = ShapeSelected((state)=>state.setShape)
+    const shape = ShapeSelected((state)=>state.shape)
+    const lock = ShapeSelected((state)=>state.lock)
+    const darkMode = ShapeSelected((state)=>state.darkMode)
     function changeShape (e: shapeDesign) {
         console.log(`shape changed to: ${e}`);
         setShape(e)
     }
-    const commonStyles = "flex cursor-pointer"
+    const commonStyles = (e: string) =>
+    `flex cursor-pointer p-2 ${
+        shape === e && !lock
+        ? (darkMode
+            ? "bg-[rgba(64,62,106,255)] rounded"
+            : "bg-[rgba(224,223,255,255)] rounded")
+        : ""
+    }`
+
     return (
-        <div className="flex gap-4 rounded-[10px] items-center">
-            <button className={commonStyles} onClick={()=>changeShape('rect')}><Square/></button>
-            <button className={commonStyles} onClick={()=>changeShape('arc')}><Circle/></button>
-            <button className={commonStyles} onClick={()=>changeShape('line')}><Arrow/></button>
-            <button className={commonStyles} onClick={()=>changeShape('text')}><Alphabet/></button>
+        <div className="flex gap-2 rounded-[10px] items-center">
+            <button className={commonStyles("rect")} onClick={()=>changeShape('rect')}><Square color={darkMode ? "white" : "black" }/></button>
+            <button className={commonStyles("arc")} onClick={()=>changeShape('arc')}><Circle color={darkMode ? "white" : "black" }/></button>
+            <button className={commonStyles("line")} onClick={()=>changeShape('line')}><Arrow color={darkMode ? "white" : "black" }/></button>
+            <button className={commonStyles("text")} onClick={()=>changeShape('text')}><Alphabet color={darkMode ? "white" : "black" }/></button>
         </div>
     )
 }
