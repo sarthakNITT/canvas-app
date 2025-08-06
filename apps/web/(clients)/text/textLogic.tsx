@@ -2,7 +2,7 @@
 
 import { ShapeSelected } from "../../zustand/store";
 
-export default function TextLogic (canvas: any, ctx: any, colour: string) {
+export default function TextLogic (canvas: any, ctx: any, colour: string, strokeColour: string) {
     console.log(`called: text`);
     let text = "";
     ctx.fillStyle = colour
@@ -32,7 +32,7 @@ export default function TextLogic (canvas: any, ctx: any, colour: string) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = colour
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'white';
+            ctx.fillStyle = strokeColour;
             ctx.fillText(text, startX, startY);
         }
     }

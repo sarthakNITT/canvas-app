@@ -4,13 +4,15 @@ type State = {
     shape: "text" | "arc" | "line" | "rect",
     lock: boolean,
     canvasColour: string,
-    darkMode: boolean
+    darkMode: boolean,
+    strokeColour: string
 }
 type Action = {
     setShape: (shape: State['shape'])=>void,
     setLock: (lock: State['lock'])=>void,
     setCanvasColour: (canvasColour: State['canvasColour'])=>void,
     setDarkMode: (darkMode: State['darkMode'])=>void,
+    setStrokeColour: (strokeColour: State['strokeColour'])=>void,
 }
 
 export const ShapeSelected = create<State & Action>((set)=>({
@@ -18,8 +20,10 @@ export const ShapeSelected = create<State & Action>((set)=>({
     lock: false,
     canvasColour: "rgba(0,0,0)",
     darkMode: true,
+    strokeColour: "rgba(0,0,0)",
     setShape: (shape)=>set(()=>({shape: shape})),
     setLock: (lock)=>set(()=>({lock: lock})),
     setCanvasColour: (canvasColour)=>set(()=>({canvasColour: canvasColour})),
-    setDarkMode: (darkMode)=>set(()=>({darkMode: darkMode}))
+    setDarkMode: (darkMode)=>set(()=>({darkMode: darkMode})),
+    setStrokeColour: (strokeColour)=>set(()=>({strokeColour: strokeColour}))
 }))

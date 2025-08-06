@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import RectLogic from "./rect/rectLogic"
 import ShapeModal from "../components/ShapeModal"
 import CircleLogic from "./circle/circleLogic"
@@ -11,6 +11,7 @@ import Unlock from "@repo/icons/unlock"
 import Lock from "@repo/icons/lock"
 import Moon from "@repo/icons/moon"
 import Sun from "@repo/icons/sun"
+import { HexColorPicker } from "react-colorful";
 
 export default function App () {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -18,9 +19,17 @@ export default function App () {
     const lock = ShapeSelected((state)=>state.lock)
     const colour = ShapeSelected((state)=>state.canvasColour)
     const darkMode = ShapeSelected((state)=>state.darkMode)
+    const strokeColour = ShapeSelected((state)=>state.strokeColour)
     const setLock = ShapeSelected((state)=>state.setLock)
     const setDarkMode = ShapeSelected((state)=>state.setDarkMode)
     const setColour = ShapeSelected((state)=>state.setCanvasColour)
+    const setStrokeColour = ShapeSelected((state)=>state.setStrokeColour)
+    const [picker, setPicker] = useState("black")
+    const [showPicker, setShowPicker] = useState(false)
+
+    useEffect(() => {
+        setStrokeColour(darkMode ? "white" : "black");
+    }, [darkMode]);
     
     useEffect(()=>{
         let cleanup: any;
@@ -37,23 +46,23 @@ export default function App () {
             console.log(`shape selected is: ${shape}`);
             if(shape==='arc'){
                 console.log(`calling: ${shape}`);
-                cleanup = CircleLogic(canvas, ctx, colour)
+                cleanup = CircleLogic(canvas, ctx, colour, strokeColour)
             }else if(shape==='line'){
                 console.log(`calling: ${shape}`);
-                cleanup = LineLogic(canvas, ctx, colour)
+                cleanup = LineLogic(canvas, ctx, colour, strokeColour)
             }else if(shape==='text'){
                 console.log(`calling: ${shape}`);
-                cleanup = TextLogic(canvas, ctx, colour)
+                cleanup = TextLogic(canvas, ctx, colour, strokeColour)
             }else if(shape==='rect'){
                 console.log(`calling: ${shape}`);
-                cleanup = RectLogic(canvas, ctx, colour)
+                cleanup = RectLogic(canvas, ctx, colour, strokeColour)
             }
         }
 
         return () => {
             cleanup?.()
         }
-    },[canvasRef, shape, lock, colour])
+    },[canvasRef, shape, lock, colour, strokeColour])
 
     function Mode () {
         setDarkMode(!darkMode)
@@ -82,7 +91,15 @@ export default function App () {
                     <ShapeModal/>
                 </div>
                 <div className="flex flex-row gap-4">
-                    <button className="flex cursor-pointer"><Colour color={darkMode ? "white" : "black" }/></button>
+                    <button className="flex cursor-pointer" onClick={() => setShowPicker(!showPicker)}><Colour color={darkMode ? "white" : "black" }/></button>
+                    {showPicker && (
+                        <div className="absolute top-10 left-5/5 transform -translate-x-1/2 z-50">
+                            <HexColorPicker color={picker} onChange={(color) => {
+                            setPicker(color)
+                            setStrokeColour(color)
+                            }} />
+                        </div>
+                    )}
                     {darkMode ? 
                         <button className="flex cursor-pointer" onClick={Mode}><Sun color={darkMode ? "white" : "black" }/></button>
                         :

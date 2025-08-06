@@ -2,7 +2,7 @@
 
 import { ShapeSelected } from "../../zustand/store";
 
-export default function RectLogic (canvas: any, ctx: any, colour: string) {
+export default function RectLogic (canvas: any, ctx: any, colour: string, strokeColour: string) {
     console.log(`called: rect`);
     ctx.fillStyle = colour
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -27,7 +27,7 @@ export default function RectLogic (canvas: any, ctx: any, colour: string) {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.fillStyle = colour
             ctx.fillRect(0, 0, canvas.width, canvas.height)
-            ctx.strokeStyle = 'rgba(255, 255, 255)'
+            ctx.strokeStyle = strokeColour
             ctx.strokeRect(startX, startY, width, height)
         }
     }
