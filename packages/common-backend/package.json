@@ -1,0 +1,20 @@
+{
+  "name": "@repo/common-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tsc -b && node ./dist/config.js"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.15.3",
+    "dotenv": "^17.0.1",
+    "zod": "^3.25.67"
+  }
+}
