@@ -16,6 +16,7 @@ function HeroSection () {
     if(session.status==="authenticated"){
       if(process.env.NODE_ENV==="production"){
         window.location.href = process.env.DRAW_LINK ?? "/draw";
+        return
       }
       route.push("/draw")
     }else if(session.status==="unauthenticated"){
