@@ -13,15 +13,17 @@ function HeroSection () {
   const route = useRouter()
   const session = useSession()
   function Start () {
-    if(session.status==="authenticated"){
-      if(process.env.NODE_ENV==="production"){
-        window.location.href = process.env.DRAW_LINK ?? "/draw";
-        return
+    function Start() {
+      if (process.env.NODE_ENV === "production") {
+        if (session.status === "authenticated") {
+          window.location.href = process.env.NEXT_PUBLIC_DRAW_LINK ?? "/draw";
+        } else if (session.status === "unauthenticated") {
+          route.push("/signin");
+        }
+        return;
       }
-      route.push("/draw")
-    }else if(session.status==="unauthenticated"){
-      route.push("/signin")
-    }
+      route.push("/draw");
+    }    
   }
     return (
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
