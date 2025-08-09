@@ -14,6 +14,9 @@ function HeroSection () {
   const session = useSession()
   function Start () {
     if(session.status==="authenticated"){
+      if(process.env.NODE_ENV==="production"){
+        window.location.href = process.env.DRAW_LINK ?? "/draw";
+      }
       route.push("/draw")
     }else if(session.status==="unauthenticated"){
       route.push("/signin")
