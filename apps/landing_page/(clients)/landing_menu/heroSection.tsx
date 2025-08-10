@@ -12,17 +12,21 @@ import { useRouter } from "next/navigation";
 function HeroSection () {
   const route = useRouter()
   const session = useSession()
-  function Start () {
-      if (process.env.NODE_ENV === "production") {
-        if (session.status === "authenticated") {
-          window.location.href = process.env.NEXT_PUBLIC_DRAW_LINK ?? "/draw";
-        } else if (session.status === "unauthenticated") {
-          route.push("/signin");
-        }
-        return;
+  function Start() {
+    if (process.env.NODE_ENV === "production") {
+      if (session.status === "authenticated") {
+        window.location.href = "https://canvasdraw.vercel.app";
+      } else if (session.status === "unauthenticated") {
+        route.push("/signin");
       }
-      route.push("/draw");
-  }
+    } else {
+      if (session.status === "authenticated") {
+        window.location.href = "http://localhost:3000";
+      } else if (session.status === "unauthenticated") {
+        route.push("/signin");
+      }
+    }
+  }  
     return (
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
